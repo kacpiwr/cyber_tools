@@ -3,14 +3,13 @@ import hashlib
 def inputPassword():
     print("Enter your password:")
     password_to_guess = input().strip()
-    print ("\033[A                             \033[A")
-    return hashlib.md5(password_to_guess.encode('utf-8')).hexdigest()
+    return hashlib.sha256(password_to_guess.encode('utf-8')).hexdigest()
 
 def findPassword(file,password_to_guess_hash):
     guessed_passwords = []
     for current_password in file.readlines():
         cleaned_password = current_password.strip() 
-        current_password_hash = hashlib.md5(cleaned_password.encode('utf-8')).hexdigest()   
+        current_password_hash = hashlib.sha256(cleaned_password.encode('utf-8')).hexdigest()   
         if(current_password_hash == password_to_guess_hash):
             guessed_passwords.append(current_password)
     return guessed_passwords
@@ -19,7 +18,7 @@ def main():
     password_to_guess = ""
     guessed_passwords = []
     password_to_guess_hash = inputPassword()
-    file_with_passwords = open('./10k_passwords.txt', 'r', encoding='latin-1')
+    file_with_passwords = open('./passlist.txt', 'r', encoding='latin-1')
 
     print("=============================\nDecrypting password ")
 

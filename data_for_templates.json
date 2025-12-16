@@ -1,0 +1,40 @@
+{
+    "names": [
+        "ania",
+        "adrian",
+        "paulina"
+    ],
+    "surnames": [
+        "brz\u0119czyszczykiewis",
+        "brz\u0119czyszczykiewicz",
+        "chujkuj"
+    ],
+    "cities": [
+        "kuj",
+        "koleczkowo",
+        "wejherowo",
+        "gdynia"
+    ],
+    "animals": [
+        "pies",
+        "kot",
+        "mysz"
+    ],
+    "special_things": [
+        "olowek"
+    ],
+    "numbers": [
+        102,
+        2137,
+        2707,
+        420,
+        55555555555555,
+        0,
+        8245,
+        1273,
+        3485
+    ],
+    "dates": [
+        "2006-02-01"
+    ]
+}
