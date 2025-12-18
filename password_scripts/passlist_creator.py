@@ -24,41 +24,58 @@ def get_date_variations(passed_date, format_type):
 
     return str_date
 
+def recursive_password_generation(current_temp, data, index, passlist_file, password):
+
+    if current_temp[index] == "" or index >= len(current_temp):
+        passlist_file.write(password + '\n')
+        return
+    if current_temp[index] == "name":
+        for name in data["names"]:
+            current_password = password + str(name)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+
+
 def create_passlist_with_combinations():
-    with open('templates.json', 'r') as file:
+    with open('/Users/kacperwrobel/Documents/cyber_tools/json_files/templates.json', 'r') as file:
         templates = json.load(file)
 
-    with open('data_for_templates.json', 'r') as file:
+    with open('/Users/kacperwrobel/Documents/cyber_tools/json_files/data_for_templates.json', 'r') as file:
         data = json.load(file)
 
-    passlist_file = open('passlist.txt', 'w', encoding='utf-8')
+    passlist_file = open('/Users/kacperwrobel/Documents/cyber_tools/password_files/passlist.txt', 'w', encoding='utf-8')
     passwords=[]
     i = 1
+    current_temp = []
     for template in templates["templates"]:
         print(f"Processing template: {i}")
         i += 1
-        for  name in data["names"]:
-            for animal in data["animals"]:
-                for city in data["cities"]:
-                    for surname in data["surnames"]:
-                        for special_thing in data["special_things"]:
-                            for number in data["numbers"]:
-                                for fdate in data["dates"]:
-                                    password = template
-                                    password = password.replace("name", name)
-                                    password = password.replace("sur", surname)
-                                    password = password.replace("city", city)
-                                    password = password.replace("animal", animal)
-                                    password = password.replace("special_thing", special_thing)
-                                    password = password.replace("number", str(number))
-                                    password = password.replace("day", str(date.fromisoformat(fdate).day))
-                                    password = password.replace("year", str(date.fromisoformat(fdate).year))
-                                    password = password.replace("mounth", str(date.fromisoformat(fdate).month))
+        current_temp = template.split("_")
+        print(current_temp)
+        password = recursive_password_generation(current_temp, data, 0, passlist_file, "")
+        passlist_file.write(password + '\n')
+    #     for  name in data["names"]:
+    #         for animal in data["animals"]:
+    #             for city in data["cities"]:
+    #                 for surname in data["surnames"]:
+    #                     for special_thing in data["special_things"]:
+    #                         for number in data["numbers"]:
+    #                             for fdate in data["dates"]:
+    #                                 password = template
+    #                                 password = password.replace("name", name)
+    #                                 password = password.replace("sur", surname)
+    #                                 password = password.replace("city", city)
+    #                                 password = password.replace("animal", animal)
+    #                                 password = password.replace("special_thing", special_thing)
+    #                                 password = password.replace("number", str(number))
+    #                                 password = password.replace("day", str(date.fromisoformat(fdate).day))
+    #                                 password = password.replace("year", str(date.fromisoformat(fdate).year))
+    #                                 password = password.replace("mounth", str(date.fromisoformat(fdate).month))
 
-                                    # if password not in passwords:
-                                    passlist_file.write(password + '\n')
-                                    passwords.append(password)
-    passlist_file.close()
+    #                                 # if password not in passwords:
+    #                                 passlist_file.write(password + '\n')
+    #                                 passwords.append(password)
+    # passlist_file.close()
 
 def input_data_for_templates():
     data = {
@@ -114,7 +131,7 @@ def input_data_for_templates():
         if k!="":
             data["dates"].append(k)
     
-    with open('data_for_templates.json', 'w', encoding='utf-8') as f:
+    with open('/Users/kacperwrobel/Documents/cyber_tools/json_files/data_for_templates.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4)
     
     create_passlist_with_combinations()

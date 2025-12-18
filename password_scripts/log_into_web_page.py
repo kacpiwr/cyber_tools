@@ -28,7 +28,7 @@ def main():
     login = "test@gmail.com"
     # Password1234! 
 
-    file_with_passwords = open('./10_passwords.txt', 'r', encoding='latin-1')
+    file_with_passwords = open('/Users/kacperwrobel/Documents/cyber_tools/password_files/10_passwords.txt', 'r', encoding='latin-1')
     for password in file_with_passwords.readlines():
         cleaned_password = password.strip() 
         request = sendRequest(login, cleaned_password, url)

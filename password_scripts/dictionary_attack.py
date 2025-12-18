@@ -18,13 +18,13 @@ def main():
     password_to_guess = ""
     guessed_passwords = []
     password_to_guess_hash = inputPassword()
-    file_with_passwords = open('./passlist.txt', 'r', encoding='latin-1')
+    file_with_passwords = open('/Users/kacperwrobel/Documents/cyber_tools/password_files/passlist.txt', 'r', encoding='latin-1')
 
     print("=============================\nDecrypting password ")
 
     guessed_passwords = findPassword(file_with_passwords, password_to_guess_hash)
     if guessed_passwords == []:
-        file_with_passwords = open('./100k_passwords.txt', 'r', encoding='latin-1')
+        file_with_passwords = open('/Users/kacperwrobel/Documents/cyber_tools/password_files/100k_passwords.txt', 'r', encoding='latin-1')
         guessed_passwords = findPassword(file_with_passwords, password_to_guess_hash)
     
     print("=============================\nFinished decrypting passwords \n=============================\n")
