@@ -34,6 +34,51 @@ def recursive_password_generation(current_temp, data, index, passlist_file, pass
             current_password = password + str(name)
             recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
             return
+    if current_temp[index] == "sur":
+        for surname in data["surnames"]:
+            current_password = password + str(surname)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+    if current_temp[index] == "city":
+        for city in data["cities"]:
+            current_password = password + str(city)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+    if current_temp[index] == "animal":
+        for animal in data["animals"]:
+            current_password = password + str(animal)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+    if current_temp[index] == "special_thing":
+        for special_thing in data["special_things"]:
+            current_password = password + str(special_thing)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+    if current_temp[index] == "number":
+        for number in data["numbers"]:
+            current_password = password + str(number)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+            return
+    if current_temp[index] == "day":
+        for fdate in data["dates"]:
+            day_variation = get_date_variations(fdate, "daydaymounth")
+            current_password = password + str(day_variation)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+        return
+    if current_temp[index] == "mounth":
+        for fdate in data["dates"]:
+            mounth_variation = get_date_variations(fdate, "mounthday")
+            current_password = password + str(mounth_variation)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+        return
+    if current_temp[index] == "year":
+        for fdate in data["dates"]:
+            year_variation = get_date_variations(fdate, "yearmounthyear")
+            current_password = password + str(year_variation)
+            recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
+        return
+    
+        
 
 
 def create_passlist_with_combinations():
@@ -52,8 +97,7 @@ def create_passlist_with_combinations():
         i += 1
         current_temp = template.split("_")
         print(current_temp)
-        password = recursive_password_generation(current_temp, data, 0, passlist_file, "")
-        passlist_file.write(password + '\n')
+        recursive_password_generation(current_temp, data, 0, passlist_file, "")
     #     for  name in data["names"]:
     #         for animal in data["animals"]:
     #             for city in data["cities"]:
