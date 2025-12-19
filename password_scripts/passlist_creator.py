@@ -77,7 +77,7 @@ def recursive_password_generation(current_temp, data, index, passlist_file, pass
             current_password = password + str(year_variation)
             recursive_password_generation(current_temp, data, index + 1, passlist_file, current_password)
         return
-    
+
         
 
 
@@ -98,28 +98,6 @@ def create_passlist_with_combinations():
         current_temp = template.split("_")
         print(current_temp)
         recursive_password_generation(current_temp, data, 0, passlist_file, "")
-    #     for  name in data["names"]:
-    #         for animal in data["animals"]:
-    #             for city in data["cities"]:
-    #                 for surname in data["surnames"]:
-    #                     for special_thing in data["special_things"]:
-    #                         for number in data["numbers"]:
-    #                             for fdate in data["dates"]:
-    #                                 password = template
-    #                                 password = password.replace("name", name)
-    #                                 password = password.replace("sur", surname)
-    #                                 password = password.replace("city", city)
-    #                                 password = password.replace("animal", animal)
-    #                                 password = password.replace("special_thing", special_thing)
-    #                                 password = password.replace("number", str(number))
-    #                                 password = password.replace("day", str(date.fromisoformat(fdate).day))
-    #                                 password = password.replace("year", str(date.fromisoformat(fdate).year))
-    #                                 password = password.replace("mounth", str(date.fromisoformat(fdate).month))
-
-    #                                 # if password not in passwords:
-    #                                 passlist_file.write(password + '\n')
-    #                                 passwords.append(password)
-    # passlist_file.close()
 
 def input_data_for_templates():
     data = {
